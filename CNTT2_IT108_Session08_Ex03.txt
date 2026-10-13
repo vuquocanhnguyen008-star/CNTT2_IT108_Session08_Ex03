@@ -1,0 +1,10 @@
+## **Bài 3: Thống kê sự cố TIMEOUT trên máy chủ**
+### **Phần 1: Phân tích (Sơ đồ luồng dữ liệu)**
+`[Đọc tệp log]` $\rightarrow$ `[Lọc dòng chứa TIMEOUT]` $\rightarrow$ `[Loại trừ dòng chứa "NOT TIMEOUT"]` $\rightarrow$ `[Đếm số đối tượng (.Count)]`
+
+### **Phần 2: Triển khai**
+**Lệnh PowerShell 1 dòng duy nhất:**
+(Get-Content server.log | Select-String "TIMEOUT" | Where-Object { $_ -notmatch "NOT TIMEOUT" }).Count
+* **Giải thích:** Đọc tệp, lọc chuỗi `"TIMEOUT"`, dùng `Where-Object` để loại bỏ các dòng có `"NOT TIMEOUT"`, và trả về con số duy nhất nhờ thuộc tính `.Count` của đối tượng.
+
+
